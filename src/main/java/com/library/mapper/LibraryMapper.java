@@ -19,7 +19,7 @@ public class LibraryMapper {
                 .isbn(request.getIsbn())
                 .title(request.getTitle())
                 .author(request.getAuthor())
-                .isBorrowed(false) // Default to not borrowed
+                .status(com.library.model.BookStatus.AVAILABLE)
                 .build();
     }
 
@@ -32,7 +32,7 @@ public class LibraryMapper {
                 .isbn(book.getIsbn())
                 .title(book.getTitle())
                 .author(book.getAuthor())
-                .isBorrowed(book.isBorrowed())
+                .status(book.getStatus())
                 .build();
     }
 
