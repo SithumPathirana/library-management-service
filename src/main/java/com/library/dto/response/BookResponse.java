@@ -1,5 +1,6 @@
 package com.library.dto.response;
 
+import com.library.model.BookStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,6 +17,5 @@ public class BookResponse {
     private String isbn;
     private String title;
     private String author;
-    private boolean isBorrowed;
+    private BookStatus status;
 }
-

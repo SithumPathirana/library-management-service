@@ -28,8 +28,10 @@ public class Book {
     @Column(nullable = false)
     private String author;
 
+    @Builder.Default
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private boolean isBorrowed = false;
+    private BookStatus status = BookStatus.AVAILABLE;
 
     @Version
     private Long version;
