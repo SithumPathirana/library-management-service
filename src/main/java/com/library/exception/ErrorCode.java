@@ -11,6 +11,7 @@ public enum ErrorCode {
     // General Errors
     INTERNAL_SERVER_ERROR("LIB_001", "Internal server error", HttpStatus.INTERNAL_SERVER_ERROR),
     INVALID_REQUEST("LIB_002", "Invalid request parameters", HttpStatus.BAD_REQUEST),
+    CORRELATION_ID_NOT_FOUND("LIB_003", "X-Correlation-Id header is missing", HttpStatus.BAD_REQUEST),
     
     // Book Errors
     BOOK_NOT_FOUND("LIB_101", "Book not found", HttpStatus.NOT_FOUND),

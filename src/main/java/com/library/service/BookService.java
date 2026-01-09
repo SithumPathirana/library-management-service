@@ -7,6 +7,7 @@ import com.library.mapper.LibraryMapper;
 import com.library.model.Book;
 import com.library.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,6 +15,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class BookService {
 
     private final BookRepository bookRepository;
@@ -21,11 +23,14 @@ public class BookService {
 
     @Transactional
     public BookResponse registerBook(BookRequest request) {
+        log.debug("Checking if book with ISBN {} exists", request.getIsbn());
         if (bookRepository.findByIsbn(request.getIsbn()).isPresent()) {
+            log.warn("Book with ISBN {} already exists", request.getIsbn());
             throw new InvalidBookDataException("Book with ISBN " + request.getIsbn() + " already exists.");
         }
         Book book = libraryMapper.toBook(request);
         Book savedBook = bookRepository.save(book);
+        log.info("Book registered successfully with ID: {}", savedBook.getId());
         return libraryMapper.toBookResponse(savedBook);
     }
 
