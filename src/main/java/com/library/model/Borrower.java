@@ -4,16 +4,18 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import java.util.UUID;
 
 @Entity
 @Table(name = "borrowers")
 @Data
+@EqualsAndHashCode(callSuper = false)
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Borrower {
+public class Borrower extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
