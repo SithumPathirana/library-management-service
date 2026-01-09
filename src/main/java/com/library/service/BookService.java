@@ -35,5 +35,12 @@ public class BookService {
                 .map(libraryMapper::toBookResponse)
                 .toList();
     }
+
+    @Transactional(readOnly = true)
+    public BookResponse getBookById(java.util.UUID id) {
+        return bookRepository.findById(id)
+                .map(libraryMapper::toBookResponse)
+                .orElseThrow(() -> new com.library.exception.BookNotFoundException("Book not found with id: " + id));
+    }
 }
 

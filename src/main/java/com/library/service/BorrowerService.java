@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -28,12 +27,19 @@ public class BorrowerService {
         Borrower savedBorrower = borrowerRepository.save(borrower);
         return libraryMapper.toBorrowerResponse(savedBorrower);
     }
-    
+
     @Transactional(readOnly = true)
     public List<BorrowerResponse> getAllBorrowers() {
         return borrowerRepository.findAll().stream()
+            .map(libraryMapper::toBorrowerResponse)
+            .toList();
+    }
+
+    @Transactional(readOnly = true)
+    public BorrowerResponse getBorrowerById(java.util.UUID id) {
+        return borrowerRepository.findById(id)
                 .map(libraryMapper::toBorrowerResponse)
-                .collect(Collectors.toList());
+                .orElseThrow(() -> new IllegalArgumentException("Borrower not found with id: " + id));
     }
 }
 

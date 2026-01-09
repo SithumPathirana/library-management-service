@@ -39,6 +39,12 @@ public class LibraryController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/books/{id}")
+    public ResponseEntity<BookResponse> getBookById(@PathVariable UUID id) {
+        BookResponse response = bookService.getBookById(id);
+        return ResponseEntity.ok(response);
+    }
+
     // --- Borrower Endpoints ---
 
     @PostMapping("/borrowers")
@@ -50,6 +56,12 @@ public class LibraryController {
     @GetMapping("/borrowers")
     public ResponseEntity<List<BorrowerResponse>> getAllBorrowers() {
         List<BorrowerResponse> response = borrowerService.getAllBorrowers();
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/borrowers/{id}")
+    public ResponseEntity<BorrowerResponse> getBorrowerById(@PathVariable UUID id) {
+        BorrowerResponse response = borrowerService.getBorrowerById(id);
         return ResponseEntity.ok(response);
     }
 
